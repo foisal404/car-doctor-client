@@ -1,9 +1,10 @@
 import { useContext } from 'react';
 import img from '../../assets/images/login/login.svg'
 import { AuthContext } from '../../provider/AuthProvider';
+import { Link } from 'react-router-dom';
 
 const Register = () => {
-    const {signUp}=useContext(AuthContext)
+    const {signUp,updateUser}=useContext(AuthContext)
     const handlerForm=event=>{
         event.preventDefault();
         const form=event.target;
@@ -14,7 +15,16 @@ const Register = () => {
         signUp(email,password)
         .then(result=>{
             const createdUser=result.user;
-            console.log(createdUser)
+            
+            updateUser(name)
+            .then(()=>{
+              console.log("profile updated")
+              console.log(createdUser)
+            })
+            .catch(error=>{
+              console.error(error.message);
+            })
+            
         })
         .catch(error=>{
             console.error(error.message);
@@ -63,13 +73,13 @@ const Register = () => {
                 className="input input-bordered"
               />
               <label className="label">
-                <a href="#" className="label-text-alt link link-hover">
-                  Forgot password?
-                </a>
+                <p >
+                  Already Have Acccount? go to <Link className='text-orange-600' to='/login'>Login</Link>
+                </p>
               </label>
             </div>
             <div className="form-control mt-6">
-              <button className="btn btn-primary" type='submit'>Sign Up</button>
+              <button className="btn btn-error" type='submit'>Sign Up</button>
             </div>
           </form>
         </div>

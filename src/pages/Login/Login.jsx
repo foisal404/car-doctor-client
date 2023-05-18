@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import img from '../../assets/images/login/login.svg'
 import { AuthContext } from '../../provider/AuthProvider';
+import { Link } from 'react-router-dom';
 const Login = () => {
     const {signUPWithGoogle,logIn}=useContext(AuthContext)
     const handlerForm=event=>{
@@ -59,17 +60,17 @@ const Login = () => {
                 className="input input-bordered"
               />
               <label className="label">
-                <a href="#" className="label-text-alt link link-hover">
-                  Forgot password?
-                </a>
+                <p>
+                  New Here? go to <Link to='/register' className='text-orange-600'>register</Link>
+                </p>
               </label>
             </div>
             <div className="form-control mt-6">
-              <button className="btn btn-primary" type='submit'>Login</button>
+              <button className="btn btn-error" type='submit'>Login</button>
             </div>
           </form>
           <div className="form-control mx-7 mt-6">
-              <button className="btn btn-primary" onClick={withGoogle}>Login With google</button>
+              <button className="btn btn-error" onClick={withGoogle}>Login With google</button>
             </div>
         </div>
       </div>

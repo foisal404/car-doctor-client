@@ -23,6 +23,11 @@ const Navbar = () => {
       <li>
         <Link>About</Link>
       </li>
+      {user && (
+        <li>
+          <Link to='/booking'>Booking</Link>
+        </li>
+      )}
     </>
   );
   return (
@@ -60,12 +65,16 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1">{navItems}</ul>
       </div>
       <div className="navbar-end">
-        {user && (
+        {user ? (
           <>
-            <p>{user?.email}</p>
+            <p className="mx-4">{user?.displayName|| user?.email}</p>
             <a className="btn btn-error" onClick={UserLogOut}>
               logout
             </a>
+          </>
+        ) : (
+          <>
+            <Link to="/login">Login</Link>
           </>
         )}
       </div>

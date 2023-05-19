@@ -10,10 +10,12 @@ const Bookings = () => {
         .then(res=>res.json())
         .then(data=>setBookings(data))
     },[])
-    console.log(bookings)
+    // console.log(bookings)
     return (
         <div>
-            
+            {
+                <p>{bookings.length}</p>
+            }
         </div>
     );
 };

@@ -1,8 +1,11 @@
 import { useContext } from 'react';
 import img from '../../assets/images/login/login.svg'
 import { AuthContext } from '../../provider/AuthProvider';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 const Login = () => {
+  const navigate=useNavigate();
+  const location=useLocation();
+  let from = location.state?.from?.pathname || "/";
     const {signUPWithGoogle,logIn}=useContext(AuthContext)
     const handlerForm=event=>{
         event.preventDefault();
@@ -14,6 +17,7 @@ const Login = () => {
         .then(result=>{
             const loggedUser=result.user;
             console.log(loggedUser)
+            navigate(from)
         })
         .catch(error=>{
             console.error(error.message);
@@ -24,6 +28,7 @@ const Login = () => {
         .then((result)=>{
             const loggedUser=result.user;
             console.log(loggedUser)
+            navigate(from)
         })
         .catch(error=>{
             console.log(error.message)

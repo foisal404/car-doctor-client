@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../provider/AuthProvider";
 import BookingRow from "./BookingRow";
+import { toast } from "react-toastify";
 
 const Bookings = () => {
   const { user } = useContext(AuthContext);
@@ -12,6 +13,23 @@ const Bookings = () => {
   }, []);
 //   console.log(bookings);
   // console.log(bookings)
+  const handleDelate=(id)=>{
+    fetch(`http://localhost:5000/bookings/${id}`,{
+      method:"DELETE"
+    })
+    .then(res=>res.json())
+    .then(data=>{
+      console.log(data);
+      if(data.deletedCount>0){
+        toast("delete booking !",{
+          
+          theme: "dark",
+          })
+        const remaining=bookings.filter(book=>book._id!==id)
+        setBookings(remaining)
+      }
+    })
+  }
   return (
     <div>
       <div className="overflow-x-auto w-full">
@@ -34,7 +52,7 @@ const Bookings = () => {
           </thead>
           <tbody>
             {bookings.map((book) => (
-              <BookingRow key={book._id} data={book}>{book.title}</BookingRow>
+              <BookingRow key={book._id} data={book} handleDelate={handleDelate}>{book.title}</BookingRow>
             ))}
           </tbody>
         </table>

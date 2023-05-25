@@ -1,9 +1,9 @@
-const BookingRow = ({ data }) => {
-  const { email, name, date, price, img, service_id, _id, title } = data;
+const BookingRow = ({ data,handleDelate }) => {
+  const { email, name, date, price, img, _id, title } = data;
   return (
     <tr>
       <th>
-        <button className="btn btn-circle btn-sm">
+        <button className="btn btn-circle btn-sm" onClick={()=>handleDelate(_id)}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-6 w-6 "

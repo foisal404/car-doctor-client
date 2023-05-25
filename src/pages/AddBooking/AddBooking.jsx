@@ -5,7 +5,7 @@ import { AuthContext } from "../../provider/AuthProvider";
 const AddBooking = () => {
     const {user}=useContext(AuthContext)
   const loader = useLoaderData();
-  const { title,img,price } = loader;
+  const { _id,title,img,price } = loader;
   console.log(loader);
   const handlerBooking = (event) => {
     event.preventDefault();
@@ -17,7 +17,7 @@ const AddBooking = () => {
     const details={
         email,name,
         date,price,
-        img
+        img,service_id:_id,title
     }
     console.log(details)
     fetch('http://localhost:5000/bookings',{

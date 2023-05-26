@@ -33,7 +33,23 @@ const AuthProvider = ({children}) => {
     useEffect(()=>{
         const unsubscribed=onAuthStateChanged(auth,currenUser=>{
             setUser(currenUser)
+            console.log(currenUser.email);
             setLoader(false)
+            if(currenUser && currenUser.email){
+                const loggedUser={email:currenUser.email}
+                fetch('http://localhost:5000/jwt',{
+              method:"POST",
+              headers:{
+                "content-type":"application/json"
+              },
+              body:JSON.stringify(loggedUser)
+            })
+            .then(res=>res.json())
+            .then(data=>{
+              console.log("jwt response",data);
+              localStorage.setItem("Car_Access_Token",data.token)
+            })
+            }
         })
         return (()=>{
             unsubscribed()
